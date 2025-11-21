@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+@@include('html/_head.htm',{
+"title":"Главная"
+})
+
+<body class="">
+	<div class="wrapper">
+		<!-- <canvas class="webgl"></canvas> -->
+		<div class="webgl">
+			<video autoplay muted loop playsinline>
+				<source src="@img/bg-video.mp4" type="video/mp4">
+			</video>
+		</div>
+		<main class="page home">
+			<div class="page__container">
+				<div class="inner">
+					<section class="header">
+						<div class="header__top">
+							<a href="" class="header__logo">
+								<img src="@img/logo.svg" alt="Logo">
+							</a>
+							<button type="button" class="header__contact-button icon-contacts-menu">
+								<div class="header__contact-button-icon">
+									<svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<g clip-path="url(#clip0_4801_90)">
+											<path
+												d="M3.87305 -0.0947266H3.875C3.99815 -0.0838239 4.13149 -0.0312274 4.2666 0.0458984C4.40303 0.123828 4.5483 0.230953 4.69629 0.357422C4.99218 0.610291 5.30697 0.947974 5.59766 1.31055C5.88855 1.67343 6.15767 2.06421 6.36133 2.42285C6.56309 2.7782 6.70743 3.11381 6.7373 3.36426C6.74419 3.42208 6.75539 3.51475 6.73926 3.65137C6.72322 3.78686 6.68084 3.96299 6.58594 4.19238C6.42005 4.5932 6.09139 5.16103 5.4541 5.96973L5.16211 6.33105C5.15619 6.33838 5.15255 6.34891 5.15234 6.36035C5.15219 6.37165 5.15547 6.38201 5.16113 6.38965C5.8751 7.33564 6.63992 8.23805 7.45117 9.09082H7.45215C8.25481 9.95256 9.10301 10.765 9.99316 11.5234C9.99963 11.5289 10.0073 11.5314 10.0137 11.5312C10.02 11.531 10.0269 11.5282 10.0332 11.5225C10.9779 10.6386 11.6154 10.2118 12.0479 10.0098C12.2648 9.90843 12.432 9.86298 12.5615 9.8457C12.6922 9.82828 12.781 9.84021 12.8359 9.84766C13.0751 9.87996 13.3927 10.0341 13.7266 10.248C14.0646 10.4647 14.4328 10.7504 14.7744 11.0596C15.1159 11.3686 15.4339 11.7033 15.6719 12.0176C15.8769 12.2884 16.0323 12.557 16.0811 12.7871L16.0947 12.8838L16.0957 12.8857C16.1249 13.3918 16.015 13.896 15.7812 14.3389L15.7822 14.3398C15.5753 14.757 15.2984 15.2192 14.9961 15.626C14.695 16.031 14.3622 16.3898 14.042 16.5908L14.04 16.5918C13.4563 16.9405 12.7944 17.1147 12.124 17.0977V17.0986L12.123 17.0977L12.1211 17.0986V17.0977C9.83493 17.0966 6.84169 15.4413 4.14941 12.5811C2.37897 10.7001 1.10319 8.68527 0.43457 6.83984C-0.232841 4.99747 -0.300215 3.30561 0.376953 2.08789C0.565413 1.74903 0.901748 1.39622 1.2832 1.07617C1.66625 0.754825 2.10182 0.460404 2.49512 0.240234C2.91398 -0.00980211 3.39253 -0.126235 3.87305 -0.0947266ZM3.70215 1.04102C3.45947 1.04924 3.22173 1.12047 3.00977 1.24805L3.00684 1.24902C2.63779 1.45565 2.26555 1.71681 1.95898 1.97461C1.64995 2.23448 1.41733 2.4838 1.31641 2.66504C0.881366 3.44733 0.882852 4.77087 1.45215 6.38867C2.01951 8.00089 3.14475 9.88615 4.92383 11.7764C6.70316 13.6667 8.47671 14.8618 9.99219 15.4639C11.5133 16.0681 12.7523 16.0673 13.4834 15.6084C13.6531 15.5019 13.8877 15.2548 14.1328 14.9258C14.3756 14.5999 14.6216 14.2042 14.8164 13.8115L14.8184 13.8076C14.9504 13.564 15.0163 13.2865 15.0107 13.0049C14.9942 12.9589 14.9595 12.894 14.9023 12.8135C14.8416 12.728 14.7613 12.6301 14.666 12.5244C14.4754 12.3129 14.2293 12.0745 13.9717 11.8486C13.714 11.6228 13.4467 11.4107 13.2148 11.252C13.0989 11.1726 12.9928 11.1075 12.9023 11.0605C12.8117 11.0135 12.744 10.988 12.7002 10.9814C12.7023 10.9817 12.6925 10.9819 12.666 10.9883C12.6416 10.9942 12.6079 11.0048 12.5645 11.0225C12.4769 11.0581 12.3537 11.1199 12.1924 11.2207C11.9504 11.372 11.6246 11.6092 11.2061 11.9717L10.7559 12.3779C10.5588 12.5618 10.3063 12.6675 10.042 12.6748C9.77756 12.682 9.51938 12.5902 9.31348 12.417V12.416C8.39017 11.6298 7.51005 10.788 6.67773 9.89453V9.89551C6.04711 9.23242 5.44446 8.54032 4.87012 7.82227L4.30469 7.0957C4.14222 6.87799 4.05785 6.60718 4.06445 6.33105C4.07109 6.05497 4.16805 5.78887 4.34082 5.58008H4.3418C4.90722 4.89791 5.24127 4.39904 5.43164 4.05664C5.52678 3.8855 5.58537 3.75431 5.61914 3.66016C5.63595 3.61326 5.64569 3.57614 5.65137 3.54883C5.65417 3.53528 5.6565 3.52444 5.65723 3.5166C5.65758 3.51271 5.6572 3.50895 5.65723 3.50684L5.63477 3.41309C5.62236 3.37607 5.60455 3.33317 5.58203 3.28418C5.53762 3.18758 5.47616 3.07454 5.40137 2.95117C5.25181 2.7045 5.05253 2.42031 4.83984 2.14648C4.62714 1.87263 4.40231 1.61079 4.20312 1.4082C4.10353 1.30692 4.01095 1.22157 3.93066 1.15723C3.85486 1.09651 3.79542 1.05981 3.75391 1.04297C3.73682 1.04202 3.71955 1.04105 3.70215 1.04102Z"
+												fill="#0B0B0B" stroke="#0B0B0B" stroke-width="0.2" />
+										</g>
+										<defs>
+											<clipPath id="clip0_4801_90">
+												<rect width="16" height="17" fill="white" />
+											</clipPath>
+										</defs>
+									</svg>
+								</div>
+								Связаться с нами
+							</button>
+						</div>
+						<div class="header__background">
+							<div class="header__background-text header__background-text--first">
+								Воплощаем Ваши идеи <br>
+								в реальность. <br>
+								Сочетаем креативность
+								с удобством использования.
+							</div>
+							<div class="header__background-text header__background-text--second">
+								Создаем системные проекты с
+								нуля, начиная с момента первоначальной идеи клиента и заканчивая релизом масштабного цифрового
+								продукта.</div>
+						</div>
+						<div class="header__bottom">
+							<h1 class="header__title">Мы Genisoft. <br>
+								Создание сайтов, мобильных и WEB-приложений.</h1>
+							<button type="button" class="header__main-button icon-contacts-menu">Заказать проект</button>
+						</div>
+					</section>
+				</div>
+				<section class="contacts">
+					<h2 class="contacts__title">Связаться с нами</h2>
+					<div class="contacts__descr">Оставьте свой номер телефона и наш менеджер перезвонит Вам как можно скорее.
+					</div>
+					<form action="#" class="contacts__form form-contacts">
+						<div class="form-contacts__input">
+							<label class="form-contacts__label" for="phone">Ваш номер</label>
+							<input type="tel" id="phone" name="form[phone]" placeholder="8 (912) 345-67-89"
+								class="form-contacts__input-input input">
+						</div>
+						<div class="form-contacts__agree-text">Нажимая кнопку “Отправить заявку”, вы соглашаетесь <br>
+							с <a target="_blank" href="./agreement.html">Политикой конфиденциальности</a>.</div>
+						<button type="submit" class="g-recaptcha form-contacts__button button" data-sitekey="EXAMPLE-KEY"
+							data-callback='onSubmit' data-action='submit'>Отправить
+							заявку</button>
+					</form>
+					<div class="contacts__info">
+						<div class="contacts__info-title">Либо пишите</div>
+						<div class="contacts__info-items">
+							<a href="mailto:office@genisoft.ru" class="contacts__info-item">
+								<div class="contacts__info-image">
+									<img src="@img/mail.svg" alt="Icon">
+								</div>
+								<span>office@genisoft.ru</span>
+								<a href="">
+								</a>
+								<a href="https://t.me/genisoft" class="contacts__info-item">
+									<div class="contacts__info-image">
+										<img src="@img/telegram.svg" alt="Icon">
+									</div>
+									<span>@genisoft</span>
+								</a>
+								<a href="tel:+74956639127" class="contacts__info-item">
+									<div class="contacts__info-image">
+										<img src="@img/phone.svg" alt="Icon">
+									</div>
+									<span>+7 495 6639127</span>
+								</a>
+						</div>
+					</div>
+					<button type="button" class="contacts__close icon-contacts-menu">
+						<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M0.530273 0.530331L7.53027 7.53033M14.5303 14.5303L7.53027 7.53033M7.53027 7.53033L14.5303 0.530331L0.530273 14.5303"
+								stroke="#0B0B0B" stroke-width="1.5" />
+						</svg>
+					</button>
+				</section>
+			</div>
+			<div class="menu">
+				<div class="menu__container">
+					<nav class="menu__nav">
+						<button type="button" class="menu__icon icon-menu">
+							Наши проекты
+							<div class="menu__icon-svg menu__icon-open">
+								<svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M5.51562 17.0337V1.03369M5.51562 1.03369L0.515625 5.77443M5.51562 1.03369L10.5156 5.77443"
+										stroke="white" stroke-width="1.5" />
+								</svg>
+							</div>
+							<div class="menu__icon-svg menu__icon-close">
+								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M0.530273 0.530273L7.53027 7.53027M14.5303 14.5303L7.53027 7.53027M7.53027 7.53027L14.5303 0.530273L0.530273 14.5303"
+										stroke="white" stroke-width="1.5" />
+								</svg>
+							</div>
+						</button>
+						<div data-spollers data-spollers-speed="600" data-one-spoller class="menu__spollers spollers-menu">
+							<div class="spollers-menu__item _spoller-active">
+								<div data-spoller class="spollers-menu__title _spoller-active"><span>Заголовок
+										спойлера</span><span>01</span>
+								</div>
+								<div class="spollers-menu__body">
+									<div class="spollers-menu__project project project-1">
+										<div class="project__left">
+											<div class="project__number">01</div>
+											<div class="project__title">UTG-Express</div>
+											<div class="project__image">
+												<img src="@img/projects/project-image-1.png" alt="Project image">
+											</div>
+											<div class="project__logo">
+												<img src="@img/projects/project-logo-1.png" alt="Project logo">
+											</div>
+										</div>
+										<div class="project__right">
+											<div class="project__products">
+												<div class="project__products-title">Продукты</div>
+												<ul class="project__products-list">
+													<li class="project__products-item">Адаптивный сайт</li>
+													<li class="project__products-item">Интеграция с 1С</li>
+													<li class="project__products-item">
+														Мобильное приложение
+														<span>iOS + Android</span>
+													</li>
+												</ul>
+											</div>
+											<div class="project__descr">Направление деятельности компании — экспресс-доставка
+												почты, авиационные, железнодорожные и автомобильные перевозки грузов.
+											</div>
+										</div>
+										<button class="project__arrow-down">
+											<svg width="24" height="38" viewBox="0 0 24 38" fill="none"
+												xmlns="http://www.w3.org/2000/svg">
+												<path
+													d="M11.5225 4.40277e-06L11.5225 36M11.5225 36L22.5225 25.3333M11.5225 36L0.522458 25.3333"
+													stroke="white" stroke-width="1.5" />
+											</svg>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="spollers-menu__item">
+								<div data-spoller class="spollers-menu__title"><span>Заголовок спойлера</span><span>02</span>
+								</div>
+								<div class="spollers-menu__body">
+									<div class="spollers-menu__project project project-2">
+										<div class="project__left">
+											<div class="project__number">02</div>
+											<div class="project__title">Козырная карта</div>
+											<div class="project__image">
+												<img src="@img/projects/project-image-2.png" alt="Project image">
+											</div>
+											<div class="project__logo">
+												<img src="@img/projects/project-logo-2.svg" alt="Project logo">
+											</div>
+										</div>
+										<div class="project__right">
+											<div class="project__products">
+												<div class="project__products-title">Продукты</div>
+												<ul class="project__products-list">
+													<li class="project__products-item">Адаптивный сайт</li>
+													<li class="project__products-item">
+														Мобильное приложение
+														<span>iOS + Android</span>
+													</li>
+												</ul>
+											</div>
+											<div class="project__descr">«Козырная Карта» — бонусная программа, программа
+												лояльности, кэшбэк и скидки в одном приложении!
+												<br> <br>
+												Выгодно. Удобно. Везде
+											</div>
+										</div>
+										<button class="project__arrow-down">
+											<svg width="24" height="38" viewBox="0 0 24 38" fill="none"
+												xmlns="http://www.w3.org/2000/svg">
+												<path
+													d="M11.5225 4.40277e-06L11.5225 36M11.5225 36L22.5225 25.3333M11.5225 36L0.522458 25.3333"
+													stroke="white" stroke-width="1.5" />
+											</svg>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="spollers-menu__item">
+								<div data-spoller class="spollers-menu__title"><span>Заголовок спойлера</span><span>03</span>
+								</div>
+								<div class="spollers-menu__body">
+									привет
+								</div>
+							</div>
+							<div class="spollers-menu__item">
+								<div data-spoller class="spollers-menu__title"><span>Заголовок спойлера</span><span>04</span>
+								</div>
+								<div class="spollers-menu__body">
+									привет
+								</div>
+							</div>
+							<div class="spollers-menu__item">
+								<div data-spoller class="spollers-menu__title"><span>Заголовок спойлера</span><span>05</span>
+								</div>
+								<div class="spollers-menu__body">
+									привет
+								</div>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</main>
+	</div>
+	@@include('html/_popup.htm',{})
+	@@include('html/_js.htm',{})
+</body>
+
+</html>
