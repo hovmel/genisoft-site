@@ -274,9 +274,11 @@ textarea {
   width: 100%;
   height: 100%;
   top: 0;
-  opacity: .5;
+  opacity: 1;
   left: 0;
-  outline: 0
+  outline: 0;
+  -webkit-transform: translate(-10%,10%) rotate(25deg);
+  transform: translate(-10%,10%) rotate(25deg)
 }
 .webgl img,
 .webgl video {
@@ -931,7 +933,8 @@ textarea {
 .project._not-active .project__arrow-down,
 .project._not-active .project__image,
 .project._not-active .project__logo,
-.project._not-active .project__right {
+.project._not-active .project__right,
+.project._not-active .project__title {
   opacity: 0;
   visibility: hidden;
   display: none
@@ -939,15 +942,21 @@ textarea {
 .project._active .project__arrow-down,
 .project._active .project__image,
 .project._active .project__logo,
-.project._active .project__right {
+.project._active .project__title {
   display: block;
+  opacity: 1;
+  visibility: visible
+}
+.project._active .project__right {
+  display: flex;
   opacity: 1;
   visibility: visible
 }
 .project__arrow-down,
 .project__image,
 .project__logo,
-.project__right {
+.project__right,
+.project__title {
   opacity: 1;
   visibility: visible;
   transition: opacity .5s ease-in-out,visibility .5s ease-in-out
@@ -990,6 +999,63 @@ textarea {
 .project-2::-webkit-scrollbar-thumb {
   background: var(--white)
 }
+.project-3 {
+  background: #e57030;
+  color: var(--white);
+  scrollbar-color: var(--white) rgba(255,255,255,.1)
+}
+.project-3 .project__arrow-down svg path {
+  stroke: var(--white)
+}
+.project-3 .project__image {
+  left: 0;
+  max-width: 100%;
+  bottom: 0
+}
+.project-3::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.1)
+}
+.project-3::-webkit-scrollbar-thumb {
+  background: var(--white)
+}
+.project-4 {
+  background: #565dae;
+  color: var(--white);
+  scrollbar-color: var(--white) rgba(255,255,255,.1)
+}
+.project-4 .project__arrow-down svg path {
+  stroke: var(--white)
+}
+.project-4 .project__image {
+  left: 0;
+  max-width: 58%;
+  bottom: 0
+}
+.project-4::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.1)
+}
+.project-4::-webkit-scrollbar-thumb {
+  background: var(--white)
+}
+.project-5 {
+  background: #363636;
+  color: var(--white);
+  scrollbar-color: var(--white) rgba(255,255,255,.1)
+}
+.project-5 .project__arrow-down svg path {
+  stroke: var(--white)
+}
+.project-5 .project__image {
+  left: 0;
+  max-width: 60%;
+  bottom: 0
+}
+.project-5::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.1)
+}
+.project-5::-webkit-scrollbar-thumb {
+  background: var(--white)
+}
 .project__left {
   display: flex;
   flex-direction: column;
@@ -1019,14 +1085,27 @@ textarea {
   margin-bottom: 1rem;
   position: relative;
   z-index: 1;
-  transition: font-size .5s ease-in-out 0s
+  transition: color .3s ease-in-out 0s
 }
-._not-active .project__title {
+.project__hidden-title {
   font-size: 1.125rem!important;
   color: var(--black);
-  margin: 0;
-  flex: 0 1 auto;
-  margin-left: 20px
+  -webkit-transform: translate(-2000%,0) rotate(-180deg);
+  transform: translate(-2000%,0) rotate(-180deg);
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transition: opacity .3s ease-in-out 0s,color .3s ease-in-out 0s,visibility .3s ease-in-out 0s,-webkit-transform .5s ease-in-out 0s;
+  transition: opacity .3s ease-in-out 0s,color .3s ease-in-out 0s,visibility .3s ease-in-out 0s,transform .5s ease-in-out 0s;
+  transition: opacity .3s ease-in-out 0s,color .3s ease-in-out 0s,visibility .3s ease-in-out 0s,transform .5s ease-in-out 0s,-webkit-transform .5s ease-in-out 0s
+}
+._not-active .project__hidden-title {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translate(-50%,0) rotate(-180deg);
+  transform: translate(-50%,0) rotate(-180deg)
 }
 .project__image {
   position: absolute;
@@ -1171,9 +1250,7 @@ textarea {
   line-height: 1.1
 }
 @media (min-width:47.99875em) {
-  ._not-active .project__title {
-    -webkit-transform: rotate(-180deg);
-    transform: rotate(-180deg);
+  .project__hidden-title {
     -webkit-writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
     writing-mode: vertical-rl
@@ -1421,9 +1498,6 @@ textarea {
   .project__title {
     font-size: 2.625rem
   }
-  ._not-active .project__title {
-    margin-left: 12px
-  }
 }
 @media (max-width:51.17375em) {
   @-webkit-keyframes rollAndFall {
@@ -1605,18 +1679,31 @@ textarea {
     margin-left: 0;
     margin-bottom: 0
   }
+  .project-3 .project__image {
+    margin-left: -17px
+  }
+  .project-4 .project__image {
+    margin-left: -17px
+  }
+  .project-5 .project__image {
+    margin-left: -17px
+  }
   .project__left {
     margin-right: 1.25rem
   }
   .project__number {
     font-size: 1rem
   }
-  .project__title {
+  ._not-active .project__hidden-title {
     -webkit-transform: translate(0,0);
     transform: translate(0,0)
   }
-  ._not-active .project__title {
-    margin-left: 0
+  .project__hidden-title {
+    top: 25px;
+    right: 14px;
+    left: auto;
+    -webkit-transform: translate(0,-200%);
+    transform: translate(0,-200%)
   }
   .project__products-item {
     font-size: 1.25rem;
@@ -1836,7 +1923,7 @@ textarea {
   html:not(.menu-open) .menu.active .menu__nav {
     height: 6.25rem
   }
-  .project._not-active:hover .project__title {
+  .project._not-active:hover .project__hidden-title {
     color: var(--accent)!important
   }
   .project._not-active:hover .project__number {
