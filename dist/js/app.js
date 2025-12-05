@@ -20876,15 +20876,40 @@
         items.forEach((item => {
             const project = item.querySelector(".spollers-menu__project");
             project.addEventListener("click", (() => {
+                if (item.classList.contains("_active")) return;
                 items.forEach((i => {
-                    i.classList.remove("_active");
                     const p = i.querySelector(".spollers-menu__project");
+                    i.classList.remove("_active");
                     p.classList.remove("_active");
                     p.classList.add("_not-active");
                 }));
                 project.classList.remove("_not-active");
                 project.classList.add("_active");
                 item.classList.add("_active");
+            }));
+        }));
+        const arrowDownButtons = document.querySelectorAll(".project__arrow-down");
+        arrowDownButtons.forEach((button => {
+            button.addEventListener("click", (() => {
+                const project = button.closest(".spollers-menu__project");
+                if (!project) return;
+                const bodies = project.querySelectorAll(".project__body");
+                const currentScrollTop = project.scrollTop;
+                let nextBodyToScroll = null;
+                for (let i = 1; i < bodies.length; i++) {
+                    const bodyTop = bodies[i].offsetTop;
+                    if (bodyTop > currentScrollTop + 1) {
+                        nextBodyToScroll = bodies[i];
+                        break;
+                    }
+                }
+                if (nextBodyToScroll) project.scrollTo({
+                    top: nextBodyToScroll.offsetTop,
+                    behavior: "smooth"
+                }); else project.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
             }));
         }));
         const form = document.querySelector(".form-contacts");

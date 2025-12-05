@@ -344,20 +344,22 @@ textarea {
   text-align: center;
   color: var(--black);
   position: absolute;
-  right: 100%;
+  right: 1000%;
   bottom: 270px;
   transition: background-color .3s ease 0s,color .3s ease 0s,bottom .3s ease 0s,margin .4s ease-in-out 0s,-webkit-transform .3s ease 0s;
   transition: background-color .3s ease 0s,color .3s ease 0s,bottom .3s ease 0s,transform .3s ease 0s,margin .4s ease-in-out 0s;
   transition: background-color .3s ease 0s,color .3s ease 0s,bottom .3s ease 0s,transform .3s ease 0s,margin .4s ease-in-out 0s,-webkit-transform .3s ease 0s
 }
 .loaded .header__main-button {
-  -webkit-animation: rollAndFall 3.25s linear forwards;
-  animation: rollAndFall 3.25s linear forwards
+  -webkit-animation: rollAndFall 3.25s linear forwards .5s;
+  animation: rollAndFall 3.25s linear forwards .5s
 }
 @-webkit-keyframes rollAndFall {
   0% {
     right: 100%;
     bottom: 270px;
+    opacity: 1;
+    visibility: visible;
     -webkit-transform: rotate(0);
     transform: rotate(0)
   }
@@ -387,13 +389,17 @@ textarea {
     right: 0;
     bottom: 0;
     -webkit-transform: rotate(360deg);
-    transform: rotate(360deg)
+    transform: rotate(360deg);
+    opacity: 1;
+    visibility: visible
   }
 }
 @keyframes rollAndFall {
   0% {
     right: 100%;
     bottom: 270px;
+    opacity: 1;
+    visibility: visible;
     -webkit-transform: rotate(0);
     transform: rotate(0)
   }
@@ -423,7 +429,9 @@ textarea {
     right: 0;
     bottom: 0;
     -webkit-transform: rotate(360deg);
-    transform: rotate(360deg)
+    transform: rotate(360deg);
+    opacity: 1;
+    visibility: visible
   }
 }
 .header__title {
@@ -449,15 +457,15 @@ textarea {
   bottom: -28px;
   -webkit-transform: scale(0);
   transform: scale(0);
-  -webkit-animation: fromZeroToFullWidth .8s linear forwards 1.8s;
-  animation: fromZeroToFullWidth .8s linear forwards 1.8s
+  -webkit-animation: fromZeroToFullWidth .8s linear forwards 2.3s;
+  animation: fromZeroToFullWidth .8s linear forwards 2.3s
 }
 .header__background-text--first {
   max-width: 11.6875rem;
   top: 15%;
   left: 38%;
-  -webkit-animation: fromZeroToFullWidthText1 .75s linear forwards 1.3s;
-  animation: fromZeroToFullWidthText1 .75s linear forwards 1.3s
+  -webkit-animation: fromZeroToFullWidthText1 .75s linear forwards 1.8s;
+  animation: fromZeroToFullWidthText1 .75s linear forwards 1.8s
 }
 .header__background-text--first::before {
   width: 427px;
@@ -468,8 +476,8 @@ textarea {
   top: 34%;
   margin-right: 16px;
   left: 55%;
-  -webkit-animation: fromZeroToFullWidthText2 .75s linear forwards 1.7s;
-  animation: fromZeroToFullWidthText2 .75s linear forwards 1.7s
+  -webkit-animation: fromZeroToFullWidthText2 .75s linear forwards 2.2s;
+  animation: fromZeroToFullWidthText2 .75s linear forwards 2.2s
 }
 .header__background-text--second::before {
   width: 610px;
@@ -875,6 +883,7 @@ textarea {
   height: calc(100dvh - 80px);
   z-index: 100;
   overflow-x: auto;
+  overflow-y: hidden;
   background-color: var(--white);
   display: flex;
   transition: all .4s ease-in-out 0s
@@ -910,7 +919,8 @@ textarea {
   scrollbar-color: var(--black) rgba(11,11,11,.1);
   background: #1b1e23;
   width: 74.6vw;
-  transition: all .5s ease-in-out 0s
+  transition: all .5s ease-in-out 0s;
+  display: block
 }
 .project._not-active {
   min-width: 5.8125rem;
@@ -918,7 +928,6 @@ textarea {
   border-left: .5px solid var(--black);
   padding: 2rem 1rem 2.6875rem;
   width: 5.8125rem;
-  overflow: hidden;
   background: #fff!important;
   cursor: pointer;
   color: var(--black)!important
@@ -1056,15 +1065,28 @@ textarea {
 .project-5::-webkit-scrollbar-thumb {
   background: var(--white)
 }
+.project__body {
+  height: 100%;
+  display: flex;
+  align-items: stretch
+}
+.project__body:not(:first-child) {
+  margin-top: 6.25rem
+}
+._not-active .project__body:not(:first-child) {
+  display: none
+}
 .project__left {
   display: flex;
   flex-direction: column;
+  height: 100%;
   flex: 1 1 auto;
   margin-right: 1.875rem
 }
 .project__right {
   flex: 0 0 29.6%;
   display: flex;
+  height: 100%;
   flex-direction: column;
   padding-top: 4.875rem;
   position: relative;
@@ -1248,6 +1270,12 @@ textarea {
 .agreement p {
   margin-bottom: 15px;
   line-height: 1.1
+}
+@media (min-width:29.99875em) {
+  .project {
+    row-gap: 6.25rem;
+    grid-template-rows: minmax(100%,1000%) minmax(100%,1000%)
+  }
 }
 @media (min-width:47.99875em) {
   .project__hidden-title {
@@ -1657,7 +1685,9 @@ textarea {
   }
   .spollers-menu {
     height: calc(100dvh - 60px);
-    display: block
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto
   }
   .project {
     padding: 1.5rem 1rem;
@@ -1826,6 +1856,11 @@ textarea {
     font-size: .75rem
   }
   .project {
+    display: flex;
+    flex-direction: column
+  }
+  .project__body {
+    display: flex;
     flex-direction: column
   }
   .project__image {
