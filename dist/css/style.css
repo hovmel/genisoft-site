@@ -133,7 +133,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 100dvh;
+  min-height: 100vh;
   padding-bottom: 5rem
 }
 .page__container {
@@ -165,8 +165,8 @@ body {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  padding-bottom: 4.1875rem;
-  padding-top: 2.125rem
+  padding-top: 2.125rem;
+  padding-bottom: 4.1875rem
 }
 [class*=__container] {
   max-width: 87rem;
@@ -780,7 +780,6 @@ textarea {
   transform: translate(0,0)
 }
 .menu {
-  padding-bottom: env(safe-area-inset-bottom);
   overflow: hidden;
   background-color: var(--white);
   color: #1b1e23;
@@ -990,6 +989,9 @@ textarea {
   left: 24px;
   bottom: 20%
 }
+.project-1 .project__title {
+  white-space: nowrap
+}
 .project-2 {
   background: #1b1e23;
   color: var(--white);
@@ -1007,6 +1009,9 @@ textarea {
 }
 .project-2::-webkit-scrollbar-thumb {
   background: var(--white)
+}
+.project-2 .project__title {
+  white-space: nowrap
 }
 .project-3 {
   background: #e57030;
@@ -1270,6 +1275,17 @@ textarea {
 .agreement p {
   margin-bottom: 15px;
   line-height: 1.1
+}
+@media (any-hover:hover) and (min-width:29.99875em) {
+  html:not(.menu-open) .header__main-button.active {
+    margin: 0 0 20px 0
+  }
+  html:not(.menu-open) .menu.active {
+    top: calc(100% - 100px)
+  }
+  html:not(.menu-open) .menu.active .menu__nav {
+    height: 6.25rem
+  }
 }
 @media (min-width:29.99875em) {
   .project {
@@ -1590,7 +1606,7 @@ textarea {
   }
   .header__bottom {
     padding-right: 16.875rem;
-    padding-top: 13.75rem
+    padding-top: 10rem
   }
   .header__main-button {
     width: 15.625rem;
@@ -1652,7 +1668,7 @@ textarea {
     margin-bottom: 1.875rem
   }
   .header__background-text {
-    font-size: .875rem
+    font-size: .9375rem
   }
   .header__background-text::before {
     bottom: -10px
@@ -1693,16 +1709,16 @@ textarea {
     padding: 1.5rem 1rem;
     border-bottom: .5px solid var(--black);
     width: 100%;
-    height: 751px
+    height: 633px
   }
   .project._not-active {
     width: 100%;
     min-width: 100%;
     padding: 1.5rem 1rem;
-    height: 66.5px
+    height: 62px
   }
   .project._not-active .project__left {
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center
   }
   .project._not-active .project__number {
@@ -1730,8 +1746,7 @@ textarea {
   }
   .project__hidden-title {
     top: 25px;
-    right: 14px;
-    left: auto;
+    left: 20px;
     -webkit-transform: translate(0,-200%);
     transform: translate(0,-200%)
   }
@@ -1811,12 +1826,12 @@ textarea {
       transform: rotate(0)
     }
     80% {
-      right: -100px;
+      right: -80px;
       -webkit-transform: rotate(400deg);
       transform: rotate(400deg)
     }
     100% {
-      right: 0;
+      right: 20px;
       bottom: 0;
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg)
@@ -1830,12 +1845,12 @@ textarea {
       transform: rotate(0)
     }
     80% {
-      right: -100px;
+      right: -80px;
       -webkit-transform: rotate(400deg);
       transform: rotate(400deg)
     }
     100% {
-      right: 0;
+      right: 20px;
       bottom: 0;
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg)
@@ -1849,11 +1864,65 @@ textarea {
   }
 }
 @media (max-width:29.99875em) {
-  .header__title {
-    font-size: 2.5rem
+  .page {
+    padding-bottom: 3.25rem
   }
-  .header__background-text {
-    font-size: .75rem
+  .inner {
+    padding-bottom: 0;
+    padding-top: 1.25rem
+  }
+  .header__logo {
+    max-width: 6.625rem
+  }
+  .header__bottom {
+    padding-top: 13.1875rem;
+    padding-bottom: 19.3125rem
+  }
+  .header__main-button {
+    width: 9.875rem;
+    height: 9.875rem;
+    font-size: 1.125rem
+  }
+  .header__title {
+    font-size: 2.125rem;
+    margin-bottom: 0
+  }
+  .header__background-text--first {
+    right: 20px;
+    left: auto;
+    top: 20%;
+    max-width: 175px
+  }
+  .header__background-text--first::before {
+    width: 100%
+  }
+  .header__background-text--second {
+    top: 62%;
+    left: 20px
+  }
+  .header__background-text--second::before {
+    width: 100%
+  }
+  .menu {
+    top: calc(100% - 52px)
+  }
+  .menu__nav {
+    height: 3.25rem
+  }
+  .menu__icon {
+    font-size: 1.125rem
+  }
+  .menu__icon-open {
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-left: 12px
+  }
+  .menu__icon-close {
+    width: 2.125rem;
+    height: 2.125rem
+  }
+  .spollers-menu {
+    height: calc(100dvh - 52px)
   }
   .project {
     display: flex;
@@ -1863,6 +1932,15 @@ textarea {
     display: flex;
     flex-direction: column
   }
+  .project__right {
+    padding-top: 1.8125rem
+  }
+  .project__title {
+    font-size: 2.125rem
+  }
+  .project__hidden-title {
+    font-size: 1.0625rem
+  }
   .project__image {
     max-width: 100%;
     position: static;
@@ -1870,6 +1948,17 @@ textarea {
   }
   .project__arrow-down {
     display: none
+  }
+  .project__products-title {
+    font-size: .9375rem;
+    margin-bottom: 1.0625rem
+  }
+  .project__products-item {
+    font-size: 1.125rem;
+    margin-bottom: 1.125rem
+  }
+  .project__descr {
+    font-size: .875rem
   }
   .notification--error,
   .notification--success {
@@ -1901,9 +1990,20 @@ textarea {
     width: calc(100% - 32px)
   }
 }
-@media (max-width:21.25em) {
-  .header__title {
-    font-size: 2.375rem
+@media (max-width:21.875em) {
+  .header__bottom {
+    padding-top: 6.25rem;
+    padding-bottom: 15.625rem
+  }
+  .header__background-text {
+    font-size: .75rem
+  }
+  .header__background-text--first {
+    top: 15%
+  }
+  .header__background-text--second {
+    top: auto;
+    bottom: 175px
   }
 }
 @media (any-hover:hover) {
@@ -1948,15 +2048,6 @@ textarea {
   }
   .menu__icon:hover .menu__icon-svg {
     background-color: var(--accent)
-  }
-  html:not(.menu-open) .header__main-button.active {
-    margin: 0 0 20px 0
-  }
-  html:not(.menu-open) .menu.active {
-    top: calc(100% - 100px)
-  }
-  html:not(.menu-open) .menu.active .menu__nav {
-    height: 6.25rem
   }
   .project._not-active:hover .project__hidden-title {
     color: var(--accent)!important
