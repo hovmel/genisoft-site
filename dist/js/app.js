@@ -610,7 +610,7 @@
         for (let i = array.length - 1; i >= 0; --i) if (array[i] >= 65535) return true;
         return false;
     }
-    Int8Array, Uint8Array, Uint8ClampedArray, Int16Array, Uint16Array, Int32Array, Uint32Array, 
+    Int8Array, Uint8Array, Uint8ClampedArray, Int16Array, Uint16Array, Int32Array, Uint32Array,
     Float32Array, Float64Array;
     function createElementNS(name) {
         return document.createElementNS("http://www.w3.org/1999/xhtml", name);
@@ -20995,7 +20995,7 @@
     const canvas = document.querySelector("canvas.webgl");
     const scene = new Scene;
     const camera = new PerspectiveCamera(45, sizes.width / sizes.height, .1, 100);
-    camera.position.z = 18;
+    camera.position.z = 6;
     camera.position.y = 2.2;
     camera.position.x = 0;
     scene.add(camera);
@@ -21012,7 +21012,7 @@
                 value: .9
             }
         },
-        vertexShader: `\n\t\tuniform float uTime;\n\t\tuniform float uElevation;\n\t\tattribute float aSize;\n\n\t\tvarying float vPositionY;\n\t\tvarying float vPositionZ;\n\t\tvarying float vX;\n\n\t\tvoid main() {\n\t\t\tvec4 modelPosition = modelMatrix * vec4(position, 1.0);\n\n\t\t\t// Явный асимметричный фактор: левее (x ~ -14) амплитуда = 1.6, правее (x ~ 14) = 0.8\n\t\t\tfloat leftFactor = mix(1.6, 0.8, smoothstep(-14.0, 14.0, modelPosition.x));\n\n\t\t\t// фактор по Z: центр ближе сильнее, края по Z "гаснут"\n\t\t\tfloat zFactor = exp(- (modelPosition.z * modelPosition.z) / 120.0);\n\n\t\t\t// волновая функция: комбинация синусов с разной частотой и временем\n\t\t\tfloat waveX = sin(modelPosition.x * 0.55 - uTime * 1.1);\n\t\t\tfloat waveZ = sin(modelPosition.z * 0.45 + uTime * 0.9);\n\t\t\tfloat height = waveX * waveZ * uElevation * leftFactor * (0.6 + zFactor * 0.8);\n\n\t\t\t// плавный спад в передней части (чтобы получить "холмы" как на картинке)\n\t\t\tfloat frontFade = smoothstep(-6.0, 6.0, modelPosition.z);\n\t\t\tmodelPosition.y = height * (1.0 - 0.5 * frontFade);\n\n\t\t\tvec4 viewPosition = viewMatrix * modelPosition;\n\t\t\tgl_Position = projectionMatrix * viewPosition;\n\n\t\t\t// размер точек: базовый aSize, скорректированный расстоянием (перспектива)\n\t\t\tfloat size = 1.8 * aSize;\n\t\t\tsize *= (1.0 / -viewPosition.z);\n\t\t\tsize = clamp(size, 0.5, 18.0);\n\t\t\tgl_PointSize = size;\n\n\t\t\tvPositionY = modelPosition.y;\n\t\t\tvPositionZ = modelPosition.z;\n\t\t\tvX = modelPosition.x;\n\t\t}\n\t`,
+        vertexShader: `\n\t\tuniform float uTime;\n\t\tuniform float uElevation;\n\t\tattribute float aSize;\n\n\t\tvarying float vPositionY;\n\t\tvarying float vPositionZ;\n\t\tvarying float vX;\n\n\t\tvoid main() {\n\t\t\tvec4 modelPosition = modelMatrix * vec4(position, 1.0);\n\n\t\t\t// Явный асимметричный фактор: левее (x ~ -14) амплитуда = 1.6, правее (x ~ 14) = 0.8\n\t\t\tfloat leftFactor = mix(1.6, 0.8, smoothstep(-14.0, 14.0, modelPosition.x));\n\n\t\t\t// фактор по Z: центр ближе сильнее, края по Z "гаснут"\n\t\t\tfloat zFactor = exp(- (modelPosition.z * modelPosition.z) / 120.0);\n\n\t\t\t// волновая функция: комбинация синусов с разной частотой и временем\n\t\t\tfloat waveX = sin(modelPosition.x * 0.55 - uTime * 1.1);\n\t\t\tfloat waveZ = sin(modelPosition.z * 0.45 + uTime * 0.9);\n\t\t\tfloat height = waveX * waveZ * uElevation * leftFactor * (0.6 + zFactor * 0.8);\n\n\t\t\t// плавный спад в передней части (чтобы получить "холмы" как на картинке)\n\t\t\tfloat frontFade = smoothstep(-6.0, 6.0, modelPosition.z);\n\t\t\tmodelPosition.y = height * (1.0 - 0.5 * frontFade);\n\n\t\t\tvec4 viewPosition = viewMatrix * modelPosition;\n\t\t\tgl_Position = projectionMatrix * viewPosition;\n\n\t\t\t// размер точек: базовый aSize, скорректированный расстоянием (перспектива)\n\t\t\tfloat size = 2.8 * aSize;\n\t\t\tsize *= (1.0 / -viewPosition.z);\n\t\t\tsize = clamp(size, 0.5, 28.0);\n\t\t\tgl_PointSize = size;\n\n\t\t\tvPositionY = modelPosition.y;\n\t\t\tvPositionZ = modelPosition.z;\n\t\t\tvX = modelPosition.x;\n\t\t}\n\t`,
         fragmentShader: `\n\t\tvarying float vPositionY;\n\t\tvarying float vPositionZ;\n\t\tvarying float vX;\n\n\t\tvoid main() {\n\t\t\tvec2 c = gl_PointCoord - vec2(0.5);\n\t\t\tfloat dist = length(c);\n\t\t\tfloat circle = smoothstep(0.5, 0.38, dist);\n\n\t\t\tfloat baseAlpha = (vPositionY + 1.2) * 0.35;\n\t\t\tfloat depthFade = clamp(1.0 - (vPositionZ + 10.0) / 24.0, 0.0, 1.0);\n\t\t\tfloat sideFade = 0.5 + 0.5 * (1.0 - smoothstep(-14.0, 14.0, vX));\n\n\t\t\tfloat alpha = baseAlpha * depthFade * sideFade;\n\t\t\talpha *= circle;\n\n\t\t\tgl_FragColor = vec4(vec3(1.0), alpha);\n\t\t}\n\t`,
         transparent: true,
         depthWrite: false
