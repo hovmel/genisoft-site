@@ -133,7 +133,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 100vh;
+  min-height: 100dvh;
   padding-bottom: 5rem
 }
 .page__container {
@@ -164,7 +164,6 @@ body {
 .inner {
   flex: 1 1 auto;
   display: flex;
-  flex-direction: column;
   padding-top: 2.125rem;
   padding-bottom: 4.1875rem
 }
@@ -927,6 +926,7 @@ textarea {
   border-left: .5px solid var(--black);
   padding: 2rem 1rem 2.6875rem;
   width: 5.8125rem;
+  overflow: hidden;
   background: #fff!important;
   cursor: pointer;
   color: var(--black)!important
@@ -1709,7 +1709,7 @@ textarea {
     padding: 1.5rem 1rem;
     border-bottom: .5px solid var(--black);
     width: 100%;
-    height: 633px
+    height: 533px
   }
   .project._not-active {
     width: 100%;
@@ -1875,8 +1875,8 @@ textarea {
     max-width: 6.625rem
   }
   .header__bottom {
-    padding-top: 13.1875rem;
-    padding-bottom: 19.3125rem
+    padding-top: 6.25rem;
+    padding-bottom: 15.625rem
   }
   .header__main-button {
     width: 9.875rem;
@@ -1890,14 +1890,14 @@ textarea {
   .header__background-text--first {
     right: 20px;
     left: auto;
-    top: 20%;
     max-width: 175px
   }
   .header__background-text--first::before {
     width: 100%
   }
   .header__background-text--second {
-    top: 62%;
+    top: auto;
+    bottom: 175px;
     left: 20px
   }
   .header__background-text--second::before {
@@ -1930,7 +1930,8 @@ textarea {
   }
   .project__body {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    height: auto
   }
   .project__right {
     padding-top: 1.8125rem
@@ -1991,19 +1992,11 @@ textarea {
   }
 }
 @media (max-width:21.875em) {
-  .header__bottom {
-    padding-top: 6.25rem;
-    padding-bottom: 15.625rem
-  }
   .header__background-text {
     font-size: .75rem
   }
   .header__background-text--first {
     top: 15%
-  }
-  .header__background-text--second {
-    top: auto;
-    bottom: 175px
   }
 }
 @media (any-hover:hover) {
