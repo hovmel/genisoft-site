@@ -4,11 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="css/style.min.css?_v=20251214183959">
+	<link rel="stylesheet" href="css/style.min.css?_v=20251227230107">
 	<title>Главная</title>
-	<!-- <script src="https://www.google.com/recaptcha/api.js?_v=20251214183959"></script> -->
-	<script src="https://unpkg.com/simple-phone-mask@1.0.4/dist/simple-phone-mask.min.js?_v=20251214183959" defer></script>
-	<link href="https://unpkg.com/simple-phone-mask@1.0.4/dist/simple-phone-mask.min.css?_v=20251214183959" rel="stylesheet" />
+	<!-- <script src="https://www.google.com/recaptcha/api.js?_v=20251227230107"></script> -->
+	<script src="https://unpkg.com/simple-phone-mask@1.0.4/dist/simple-phone-mask.min.js?_v=20251227230107" defer></script>
+	<link href="https://unpkg.com/simple-phone-mask@1.0.4/dist/simple-phone-mask.min.css?_v=20251227230107" rel="stylesheet" />
 	<link rel="icon" type="image.webp" href="favicon-96x96.webp" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="favicon.svg" />
 	<link rel="shortcut icon" href="favicon.ico" />
@@ -70,51 +70,50 @@
 						</div>
 					</section>
 				</div>
-				<section class="contacts">
-					<h2 class="contacts__title">Связаться с нами</h2>
-					<div class="contacts__descr">Оставьте свой номер телефона и наш менеджер перезвонит Вам как можно скорее.
-					</div>
-					<form action="#" class="contacts__form form-contacts">
-						<div class="form-contacts__input">
-							<label class="form-contacts__label" for="phone">Ваш номер</label>
-							<input type="tel" id="phone" name="form[phone]" placeholder="8 (912) 345-67-89" class="form-contacts__input-input input">
-						</div>
-						<div class="form-contacts__agree-text">Нажимая кнопку “Отправить заявку”, вы соглашаетесь <br>
-							с <a target="_blank" href="./agreement.html">Политикой конфиденциальности</a>.</div>
-						<button type="submit" class="g-recaptcha form-contacts__button button" data-sitekey="EXAMPLE-KEY" data-callback='onSubmit' data-action='submit'>Отправить
-							заявку</button>
-					</form>
-					<div class="contacts__info">
-						<div class="contacts__info-title">Либо пишите</div>
-						<div class="contacts__info-items">
-							<a href="mailto:office@genisoft.ru" class="contacts__info-item" />
-								<div class="contacts__info-image">
-									<img src="img/mail.svg" alt="Icon">
-								</div>
-								<span>office@genisoft.ru</span>
-								<a href="">
-								</a>
-								<a href="https://t.me/genisoft" class="contacts__info-item">
-									<div class="contacts__info-image">
-										<img src="img/telegram.svg" alt="Icon">
-									</div>
-									<span>@genisoft</span>
-								</a>
-								<a href="tel:+74956639127" class="contacts__info-item">
-									<div class="contacts__info-image">
-										<img src="img/phone.svg" alt="Icon">
-									</div>
-									<span>+7 495 6639127</span>
-								</a>
-						</div>
-					</div>
-					<button type="button" class="contacts__close icon-contacts-menu">
-						<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M0.530273 0.530331L7.53027 7.53033M14.5303 14.5303L7.53027 7.53033M7.53027 7.53033L14.5303 0.530331L0.530273 14.5303" stroke="#0B0B0B" stroke-width="1.5" />
-						</svg>
-					</button>
-				</section>
 			</div>
+			<section class="contacts">
+				<h2 class="contacts__title">Связаться с нами</h2>
+				<div class="contacts__descr">Оставьте свой номер телефона и наш менеджер перезвонит Вам как можно скорее.
+				</div>
+				<form action="#" class="contacts__form form-contacts">
+					<div class="form-contacts__input">
+						<label class="form-contacts__label" for="phone">Ваш номер</label>
+						<input type="tel" id="phone" name="form[phone]" placeholder="8 (912) 345-67-89" class="form-contacts__input-input input">
+					</div>
+					<div class="form-contacts__agree-text">Нажимая кнопку “Отправить заявку”, вы соглашаетесь <br>
+						с <a target="_blank" href="./agreement.html">Политикой конфиденциальности</a>.</div>
+					<button type="submit" class="g-recaptcha form-contacts__button button" data-sitekey="EXAMPLE-KEY" data-callback='onSubmit' data-action='submit'>Отправить
+						заявку</button>
+				</form>
+				<div class="contacts__info">
+					<div class="contacts__info-title">Либо пишите</div>
+					<div class="contacts__info-items">
+						<a href="mailto:office@genisoft.ru" class="contacts__info-item">
+							<div class="contacts__info-image">
+								<img src="img/mail.svg" alt="Icon">
+							</div>
+							<span>office@genisoft.ru</span>
+						</a>
+						<a href="https://t.me/genisoft" class="contacts__info-item">
+							<div class="contacts__info-image">
+								<img src="img/telegram.svg" alt="Icon">
+							</div>
+							<span>@genisoft</span>
+						</a>
+						<a href="tel:+74956639127" class="contacts__info-item">
+							<div class="contacts__info-image">
+								<img src="img/phone.svg" alt="Icon">
+							</div>
+							<span>+7 495 6639127</span>
+						</a>
+					</div>
+				</div>
+				<button type="button" class="contacts__close icon-contacts-menu">
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0.530273 0.530331L7.53027 7.53033M14.5303 14.5303L7.53027 7.53033M7.53027 7.53033L14.5303 0.530331L0.530273 14.5303" stroke="#0B0B0B" stroke-width="1.5" />
+					</svg>
+				</button>
+			</section>
 			<div class="menu">
 				<div class="menu__container">
 					<nav class="menu__nav">
@@ -226,34 +225,6 @@
 												лояльности, кэшбэк и скидки в одном приложении!
 												<br> <br>
 												Выгодно. Удобно. Везде
-											</div>
-										</div>
-									</div>
-									<div class="project__body">
-										<div class="project__right">
-											<div class="project__products">
-												<div class="project__products-title">Продукты</div>
-												<ul class="project__products-list">
-													<li class="project__products-item">Адаптивный сайт</li>
-													<li class="project__products-item">
-														Мобильное приложение
-														<span>iOS + Android</span>
-													</li>
-												</ul>
-											</div>
-											<div class="project__descr">«Козырная Карта» — бонусная программа, программа
-												лояльности, кэшбэк и скидки в одном приложении!
-												<br> <br>
-												Выгодно. Удобно. Везде
-											</div>
-										</div>
-										<div class="project__left">
-											<div class="project__title">Козырная карта</div>
-											<div class="project__image">
-												<img src="img/projects/project-image-2.webp" alt="Project image">
-											</div>
-											<div class="project__logo">
-												<img src="img/projects/project-logo-2.svg" alt="Project logo">
 											</div>
 										</div>
 									</div>
@@ -428,33 +399,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="project__body">
-										<div class="project__right">
-											<div class="project__products">
-												<div class="project__products-title">Продукты</div>
-												<ul class="project__products-list">
-													<li class="project__products-item">Адаптивный сайт</li>
-													<li class="project__products-item">
-														Мобильное приложение
-														<span>iOS + Android</span>
-													</li>
-												</ul>
-											</div>
-											<div class="project__descr">«Automotive Replacement Glass» — японские технологии.
-												Инновационные решения. Полная комплектация.
-											</div>
-										</div>
-										<div class="project__left">
-											<div class="project__title">Automotive Replacement Glass</div>
-											<div class="project__image">
-												<img src="img/projects/project-image-5.webp" alt="Project image">
-											</div>
-											<div class="project__logo">
-												<img src="img/projects/project-logo-5.svg" alt="Project logo">
-											</div>
-										</div>
-									</div>
-
 									<button class="project__arrow-down">
 										<svg width="24" height="38" viewBox="0 0 24 38" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M11.5225 4.40277e-06L11.5225 36M11.5225 36L22.5225 25.3333M11.5225 36L0.522458 25.3333" stroke="white" stroke-width="1.5" />
@@ -493,7 +437,7 @@
 			</svg>
 		</button>
 	</div>
-	<script src="js/app.min.js?_v=20251214183959"></script>
+	<script src="js/app.min.js?_v=20251227230107"></script>
 </body>
 
 </html>

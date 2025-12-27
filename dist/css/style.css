@@ -109,6 +109,14 @@ body {
   -ms-scroll-chaining: none;
   overscroll-behavior: none
 }
+body.no-transition *,
+body.no-transition *::after,
+body.no-transition *::before {
+  transition: none!important
+}
+* {
+  -webkit-tap-highlight-color: transparent
+}
 .wrapper {
   padding-bottom: env(safe-area-inset-bottom);
   min-height: 100%;
@@ -141,25 +149,6 @@ body {
   width: 100%;
   display: flex;
   position: relative
-}
-.page.home::before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  background: var(--accent);
-  top: 0;
-  transition: -webkit-transform .6s ease-in-out 0s;
-  transition: transform .6s ease-in-out 0s;
-  transition: transform .6s ease-in-out 0s,-webkit-transform .6s ease-in-out 0s;
-  right: 0;
-  z-index: 10;
-  -webkit-transform: translate(200%,0);
-  transform: translate(200%,0);
-  width: calc((100% - 1355px)/ 2)
-}
-.contacts-menu-open .page.home::before {
-  -webkit-transform: translate(0,0);
-  transform: translate(0,0)
 }
 .inner {
   flex: 1 1 auto;
@@ -273,16 +262,15 @@ textarea {
   width: 100%;
   height: 100%;
   top: -80px;
-  /*opacity: 1;*/
   left: 0;
   outline: 0;
-  /*-webkit-transform: translate(-10%,10%) rotate(25deg);*/
-  /*transform: translate(-10%,10%) rotate(25deg)*/
+  -webkit-transform: translate(0,10%);
+  transform: translate(0,10%)
 }
 .webgl img,
 .webgl video {
-  /*-webkit-transform: translate(-20%,20%) rotate(15deg);*/
-  /*transform: translate(-20%,20%) rotate(15deg)*/
+  -webkit-transform: translate(-20%,20%);
+  transform: translate(-20%,20%)
 }
 .header {
   flex: 1 1 auto;
@@ -350,8 +338,8 @@ textarea {
   transition: background-color .3s ease 0s,color .3s ease 0s,bottom .3s ease 0s,transform .3s ease 0s,margin .4s ease-in-out 0s,-webkit-transform .3s ease 0s
 }
 .loaded .header__main-button {
-  -webkit-animation: rollAndFall 3.25s linear forwards .5s;
-  animation: rollAndFall 3.25s linear forwards .5s
+  -webkit-animation: rollAndFall 3.25s linear forwards 5s;
+  animation: rollAndFall 3.25s linear forwards 5s
 }
 @-webkit-keyframes rollAndFall {
   0% {
@@ -908,8 +896,6 @@ textarea {
 }
 .project {
   height: 100%;
-  display: flex;
-  align-items: stretch;
   padding: 2rem 2.0625rem 3.25rem 2.0625rem;
   overflow: auto;
   position: relative;
@@ -1072,11 +1058,9 @@ textarea {
 }
 .project__body {
   height: 100%;
+  flex: 0 0 100%;
   display: flex;
   align-items: stretch
-}
-.project__body:not(:first-child) {
-  margin-top: 6.25rem
 }
 ._not-active .project__body:not(:first-child) {
   display: none
@@ -1154,6 +1138,9 @@ textarea {
   -webkit-animation: scrollArrowMoving 1.5s alternate infinite;
   animation: scrollArrowMoving 1.5s alternate infinite
 }
+._no-scroll .project__arrow-down {
+  display: none!important
+}
 .project__logo {
   position: relative;
   z-index: 1
@@ -1172,6 +1159,8 @@ textarea {
   line-height: 150%
 }
 .project__products-item {
+  display: flex;
+  flex-direction: column;
   font-size: 1.5rem;
   margin-bottom: 2.125rem
 }
@@ -1287,13 +1276,10 @@ textarea {
     height: 6.25rem
   }
 }
-@media (min-width:29.99875em) {
-  .project {
-    row-gap: 6.25rem;
-    grid-template-rows: minmax(100%,1000%) minmax(100%,1000%)
-  }
-}
 @media (min-width:47.99875em) {
+  .project__body:not(:first-child) {
+    margin-top: 6.25rem
+  }
   .project__hidden-title {
     -webkit-writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
@@ -1306,9 +1292,6 @@ textarea {
   }
 }
 @media (max-width:87em) {
-  .page.home::before {
-    width: 1.0625rem
-  }
   .contacts {
     padding-top: 5rem;
     padding-left: 1.25rem
@@ -1601,9 +1584,6 @@ textarea {
   .page {
     padding-bottom: 3.75rem
   }
-  .page.home::before {
-    display: none
-  }
   .header__bottom {
     padding-right: 16.875rem;
     padding-top: 10rem
@@ -1709,7 +1689,9 @@ textarea {
     padding: 1.5rem 1rem;
     border-bottom: .5px solid var(--black);
     width: 100%;
-    height: 533px
+    height: auto;
+    display: flex;
+    gap: 6.25rem
   }
   .project._not-active {
     width: 100%;
@@ -1725,14 +1707,29 @@ textarea {
     margin-left: 0;
     margin-bottom: 0
   }
+  .project-1 {
+    height: 661.2px
+  }
+  .project-2 {
+    height: 773.57px
+  }
   .project-3 .project__image {
     margin-left: -17px
+  }
+  .project-3 {
+    height: 652.11px
   }
   .project-4 .project__image {
     margin-left: -17px
   }
+  .project-4 {
+    height: 667.18px
+  }
   .project-5 .project__image {
     margin-left: -17px
+  }
+  .project-5 {
+    height: 671.77px
   }
   .project__left {
     margin-right: 1.25rem
@@ -1750,9 +1747,35 @@ textarea {
     -webkit-transform: translate(0,-200%);
     transform: translate(0,-200%)
   }
+  .project__arrow-down {
+    bottom: 41px
+  }
   .project__products-item {
     font-size: 1.25rem;
     margin-bottom: 1.5rem
+  }
+  .project__descr {
+    display: none
+  }
+  @-webkit-keyframes scrollArrowMoving {
+    0% {
+      -webkit-transform: translate(0,0) rotate(-90deg);
+      transform: translate(0,0) rotate(-90deg)
+    }
+    100% {
+      -webkit-transform: translate(100%,0) rotate(-90deg);
+      transform: translate(100%,0) rotate(-90deg)
+    }
+  }
+  @keyframes scrollArrowMoving {
+    0% {
+      -webkit-transform: translate(0,0) rotate(-90deg);
+      transform: translate(0,0) rotate(-90deg)
+    }
+    100% {
+      -webkit-transform: translate(100%,0) rotate(-90deg);
+      transform: translate(100%,0) rotate(-90deg)
+    }
   }
 }
 @media (max-width:46.17375em) {
@@ -1826,7 +1849,7 @@ textarea {
       transform: rotate(0)
     }
     80% {
-      right: -80px;
+      right: 0;
       -webkit-transform: rotate(400deg);
       transform: rotate(400deg)
     }
@@ -1845,7 +1868,7 @@ textarea {
       transform: rotate(0)
     }
     80% {
-      right: -80px;
+      right: 0;
       -webkit-transform: rotate(400deg);
       transform: rotate(400deg)
     }
@@ -1876,7 +1899,9 @@ textarea {
   }
   .header__bottom {
     padding-top: 6.25rem;
-    padding-bottom: 15.625rem
+    padding-bottom: 16.25rem;
+    padding-top: 8.125rem;
+    padding-bottom: 16.875rem
   }
   .header__main-button {
     width: 9.875rem;
@@ -1903,6 +1928,20 @@ textarea {
   .header__background-text--second::before {
     width: 100%
   }
+  .contacts {
+    padding: 3.75rem 1.25rem 5.625rem
+  }
+  .form-contacts {
+    margin-bottom: 3.5rem
+  }
+  .form-contacts__agree-text {
+    font-size: .8125rem
+  }
+  .form-contacts__button {
+    width: 7.5rem;
+    font-size: 1.0625rem;
+    height: 7.5rem
+  }
   .menu {
     top: calc(100% - 52px)
   }
@@ -1924,14 +1963,19 @@ textarea {
   .spollers-menu {
     height: calc(100dvh - 52px)
   }
-  .project {
-    display: flex;
-    flex-direction: column
-  }
   .project__body {
     display: flex;
     flex-direction: column;
     height: auto
+  }
+  .project__body:first-child .project__logo {
+    position: absolute;
+    bottom: 21px;
+    left: 21px
+  }
+  .project__body:first-child .project__right {
+    padding-top: 1.8125rem;
+    padding-bottom: 7.9375rem
   }
   .project__right {
     padding-top: 1.8125rem
@@ -1948,7 +1992,8 @@ textarea {
     margin-bottom: 1rem
   }
   .project__arrow-down {
-    display: none
+    left: auto;
+    right: 85px
   }
   .project__products-title {
     font-size: .9375rem;
@@ -1957,9 +2002,6 @@ textarea {
   .project__products-item {
     font-size: 1.125rem;
     margin-bottom: 1.125rem
-  }
-  .project__descr {
-    font-size: .875rem
   }
   .notification--error,
   .notification--success {
