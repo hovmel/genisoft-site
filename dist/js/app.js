@@ -20886,45 +20886,143 @@
             allowCountrySelect: false
         });
     }
+    function checkScroll(project) {
+        if (window.innerWidth > 767.98) if (!(project.scrollHeight - project.clientHeight > 116)) project.classList.add("_no-scroll"); else project.classList.remove("_no-scroll"); else {
+            const bodies = project.querySelectorAll(".project__body");
+            if (bodies.length <= 1) project.classList.add("_no-scroll"); else project.classList.remove("_no-scroll");
+        }
+    }
+    function isMobileProjectsView() {
+        return window.innerWidth <= 767.98;
+    }
+    function measureMobileContentHeight(project) {
+        if (!project) return 62;
+        const prevHeight = project.style.height;
+        const prevMin = project.style.minHeight;
+        const prevMax = project.style.maxHeight;
+        const prevOverflow = project.style.overflow;
+        project.style.height = "auto";
+        project.style.minHeight = "0";
+        project.style.maxHeight = "none";
+        project.style.overflow = "hidden";
+        const bodies = project.querySelectorAll(".project__body");
+        let contentH = 0;
+        if (bodies.length) {
+            bodies.forEach((body => {
+                contentH = Math.max(contentH, body.scrollHeight);
+            }));
+        } else contentH = project.scrollHeight;
+        const styles = window.getComputedStyle(project);
+        const padY = (parseFloat(styles.paddingTop) || 0) + (parseFloat(styles.paddingBottom) || 0);
+        const height = contentH + padY;
+        project.style.height = prevHeight;
+        project.style.minHeight = prevMin;
+        project.style.maxHeight = prevMax;
+        project.style.overflow = prevOverflow;
+        return Math.max(Math.ceil(height), 62);
+    }
+    function clearProjectInlineHeight(project) {
+        if (!project) return;
+        project.style.height = "";
+        project.style.maxHeight = "";
+        project.style.minHeight = "";
+    }
+    function animateMobileProjectHeights(closingData, openingProject) {
+        if (!isMobileProjectsView()) {
+            closingData.forEach((entry => clearProjectInlineHeight(entry.project)));
+            clearProjectInlineHeight(openingProject);
+            return;
+        }
+        const COLLAPSED = 62;
+        closingData.forEach((entry => {
+            const p = entry.project;
+            if (!p) return;
+            p.style.height = entry.fromHeight + "px";
+            void p.offsetHeight;
+            p.style.height = COLLAPSED + "px";
+        }));
+        if (!openingProject) return;
+        const expanded = measureMobileContentHeight(openingProject);
+        openingProject.style.height = COLLAPSED + "px";
+        void openingProject.offsetHeight;
+        openingProject.style.height = expanded + "px";
+        const onEnd = e => {
+            if (e.propertyName !== "height") return;
+            openingProject.removeEventListener("transitionend", onEnd);
+            if (openingProject.classList.contains("_active") && isMobileProjectsView()) {
+                openingProject.style.height = "auto";
+            }
+        };
+        openingProject.addEventListener("transitionend", onEnd);
+    }
     function initSpollers() {
-        const items = document.querySelectorAll(".spollers-menu__item");
-        items.forEach((item => {
-            const project = item.querySelector(".spollers-menu__project");
-            project.addEventListener("click", (() => {
+        const container = document.querySelector(".menu__spollers.spollers-menu");
+        if (!container) return;
+        if (!container.dataset.genisoftSpollerDelegated) {
+            container.dataset.genisoftSpollerDelegated = "1";
+            container.addEventListener("click", (e => {
+                if (e.target.closest(".project__arrow-down")) return;
+                const item = e.target.closest(".spollers-menu__item");
+                const project = e.target.closest(".spollers-menu__project");
+                if (!item || !project || !container.contains(item)) return;
                 if (item.classList.contains("_active")) return;
+                const items = container.querySelectorAll(".spollers-menu__item");
+                const closingData = [];
                 items.forEach((i => {
                     const p = i.querySelector(".spollers-menu__project");
+                    if (!p) return;
+                    if (p.classList.contains("_active")) closingData.push({
+                        project: p,
+                        fromHeight: p.offsetHeight
+                    });
+                }));
+                items.forEach((i => {
+                    const p = i.querySelector(".spollers-menu__project");
+                    if (!p) return;
                     i.classList.remove("_active");
                     p.classList.remove("_active");
                     p.classList.add("_not-active");
                 }));
                 project.classList.remove("_not-active");
                 project.classList.add("_active");
+                animateMobileProjectHeights(closingData, project);
                 checkScroll(project);
                 item.classList.add("_active");
             }));
-        }));
-        function checkScroll(project) {
-            if (window.innerWidth > 767.98) if (!(project.scrollHeight - project.clientHeight > 116)) project.classList.add("_no-scroll"); else project.classList.remove("_no-scroll"); else {
-                const bodies = project.querySelectorAll(".project__body");
-                if (bodies.length <= 1) project.classList.add("_no-scroll"); else project.classList.remove("_no-scroll");
-            }
         }
         const activeProject = document.querySelector(".spollers-menu__project._active");
-        if (activeProject) checkScroll(activeProject);
-        let resizeTimeout;
-        window.addEventListener("resize", (() => {
-            document.body.classList.add("no-transition");
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout((() => {
-                document.body.classList.remove("no-transition");
-            }), 150);
-        }));
+        if (activeProject) {
+            if (isMobileProjectsView()) {
+                clearProjectInlineHeight(activeProject);
+                activeProject.style.height = "auto";
+            }
+            checkScroll(activeProject);
+        }
+        if (!window.__genisoftSpollersResizeBound) {
+            window.__genisoftSpollersResizeBound = true;
+            let resizeTimeout;
+            window.addEventListener("resize", (() => {
+                document.body.classList.add("no-transition");
+                document.querySelectorAll(".spollers-menu__project").forEach((p => {
+                    if (!isMobileProjectsView()) clearProjectInlineHeight(p); else if (p.classList.contains("_active")) {
+                        clearProjectInlineHeight(p);
+                        p.style.height = "auto";
+                    } else if (p.classList.contains("_not-active")) p.style.height = "62px";
+                }));
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout((() => {
+                    document.body.classList.remove("no-transition");
+                }), 150);
+            }));
+        }
     }
     function initScrollLogic() {
         const arrowDownButtons = document.querySelectorAll(".project__arrow-down");
         if (arrowDownButtons.length > 0) arrowDownButtons.forEach((button => {
-            button.addEventListener("click", (() => {
+            if (button.dataset.genisoftScrollBound === "1") return;
+            button.dataset.genisoftScrollBound = "1";
+            button.addEventListener("click", (e => {
+                e.stopPropagation();
                 const project = button.closest(".spollers-menu__project");
                 if (!project) return;
                 const bodies = project.querySelectorAll(".project__body");
@@ -20948,7 +21046,6 @@
                 } else {
                     const currentScrollLeft = project.scrollLeft;
                     let nextBodyToScroll = null;
-                    console.log(bodies.length);
                     for (let i = 1; i < bodies.length; i++) {
                         const bodyLeft = bodies[i].offsetLeft;
                         if (bodyLeft > currentScrollLeft + 5) {
@@ -20967,17 +21064,67 @@
             }));
         }));
     }
+    window.reinitGenisoftProjectsUI = function() {
+        initSpollers();
+        initScrollLogic();
+    };
+    function showFormNotification(notification, title, text, delay = 5000) {
+        if (!notification) return;
+        const titleEl = notification.querySelector(".notification__title");
+        const textEl = notification.querySelector(".notification__text");
+        if (titleEl) titleEl.textContent = title;
+        if (textEl) textEl.textContent = text;
+        notification.style.display = "block";
+        notification.setAttribute("aria-hidden", "false");
+        setTimeout((() => {
+            notification.style.display = "none";
+            notification.setAttribute("aria-hidden", "true");
+        }), delay);
+    }
     function initForm() {
         const form = document.querySelector(".form-contacts");
+        if (!form) return;
         const phone = form.querySelector('[name="form[phone]"]');
-        document.querySelector(".notification--success");
-        document.querySelector(".notification--error");
+        if (!phone) return;
+        const successEl = document.querySelector(".notification--success");
+        const errorEl = document.querySelector(".notification--error");
         form.addEventListener("submit", (async function(e) {
             e.preventDefault();
+            phone.classList.remove("_form-error");
             const phoneValue = phone.value.trim();
             if (!phoneValue || phoneValue === "+7" || phoneValue.length != 18) {
                 phone.classList.add("_form-error");
                 return;
+            }
+            const api = window.GenisoftSiteApi;
+            if (!api || typeof api.submitFeedback !== "function") {
+                console.warn("[Genisoft] Подключите js/site-api.js для отправки формы.");
+                showFormNotification(errorEl, "Ошибка", "Не настроен запрос к серверу.", 6e3);
+                return;
+            }
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.setAttribute("aria-busy", "true");
+            }
+            try {
+                const result = await api.submitFeedback(phoneValue);
+                if (result.ok && result.status === 200) {
+                    const msg = result.body && result.body.message ? result.body.message : "Заявка отправлена.";
+                    showFormNotification(successEl, "Заявка отправлена", msg, 5e3);
+                    form.reset();
+                } else if (result.status === 422) {
+                    showFormNotification(errorEl, "Проверьте номер", api.feedbackErrorMessage(result), 6e3);
+                } else {
+                    showFormNotification(errorEl, "Ошибка", api.feedbackErrorMessage(result), 6e3);
+                }
+            } catch (err) {
+                showFormNotification(errorEl, "Ошибка", "Не удалось отправить. Проверьте соединение.", 6e3);
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.removeAttribute("aria-busy");
+                }
             }
         }));
     }

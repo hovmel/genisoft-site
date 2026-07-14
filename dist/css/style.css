@@ -925,13 +925,21 @@ textarea {
   margin-left: 20px
 }
 .project._not-active .project__arrow-down,
-.project._not-active .project__image,
 .project._not-active .project__logo,
 .project._not-active .project__right,
 .project._not-active .project__title {
   opacity: 0;
   visibility: hidden;
   display: none
+}
+.project._not-active .project__image {
+  display: block !important;
+  opacity: 0;
+  pointer-events: none;
+  height: 0 !important;
+  max-height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden
 }
 .project._active .project__arrow-down,
 .project._active .project__image,
@@ -946,8 +954,11 @@ textarea {
   opacity: 1;
   visibility: visible
 }
+.project .project__image {
+  -webkit-transition: opacity .5s ease-in-out, height .5s ease-in-out, max-height .5s ease-in-out;
+  transition: opacity .5s ease-in-out, height .5s ease-in-out, max-height .5s ease-in-out
+}
 .project__arrow-down,
-.project__image,
 .project__logo,
 .project__right,
 .project__title {
@@ -1056,6 +1067,325 @@ textarea {
 .project-5::-webkit-scrollbar-thumb {
   background: var(--white)
 }
+.project._not-active .project__body[data-api-body-bg] {
+  background-color: transparent !important
+}
+.project._active .project__body[data-api-body-bg] {
+  background-color: var(--api-body-bg) !important
+}
+.project-from-api[data-api-bg]._active {
+  background-color: var(--api-project-bg) !important
+}
+.project-from-api {
+  transition: width .5s ease-in-out, min-width .5s ease-in-out, max-width .5s ease-in-out, opacity .5s ease-in-out, visibility .5s ease-in-out
+}
+.project-from-api._not-active .project__number {
+  color: var(--black) !important
+}
+.project-from-api._active .project__number {
+  color: var(--api-active-number-color, #ffffff)
+}
+.project-from-api._active {
+  --project-pad-bottom: 3.25rem;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important
+}
+.project-from-api .project__body {
+  position: relative;
+  z-index: 0;
+  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  box-sizing: border-box
+}
+.project-from-api._active .project__body {
+  padding-left: 2.0625rem;
+  padding-right: 2.0625rem;
+  box-sizing: border-box
+}
+.project-from-api._active .project__left,
+.project-from-api._active .project__right {
+  padding-bottom: var(--project-pad-bottom)
+}
+.project-from-api .project__number,
+.project-from-api .project__title,
+.project-from-api .project__logo,
+.project-from-api .project__right {
+  position: relative;
+  z-index: 2
+}
+.project-from-api .project__body--text-left {
+  flex-direction: row-reverse
+}
+.project-from-api .project__body--text-left .project__left {
+  margin-right: 0;
+  margin-left: 1.875rem
+}
+.project-from-api .project__image {
+  z-index: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-left: 0 !important;
+  max-width: var(--api-image-max-width, 70%)
+}
+.project-from-api .project__image[data-image-position="left"] {
+  left: 0;
+  top: 100px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  -webkit-transform: none;
+  transform: none
+}
+.project-from-api .project__image[data-image-position="left-offset"] {
+  left: 24px;
+  bottom: 20%;
+  top: auto
+}
+.project-from-api .project__image[data-image-position="bottom-left"] {
+  left: 0;
+  bottom: 0;
+  top: auto
+}
+.project-from-api .project__image[data-image-position="bottom"] {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 100% !important;
+  height: auto;
+  max-height: none
+}
+.project-from-api .project__image[data-image-position="full-width"] {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  width: 100%;
+  max-width: 100% !important;
+  height: auto;
+  max-height: none
+}
+.project-from-api._active .project__image:not([data-image-position="bottom"]):not([data-image-position="full-width"]):not([data-image-position="left"]) {
+  height: 85%;
+  max-height: 85%;
+  opacity: 1
+}
+.project-from-api._active .project__image[data-image-position="left"] {
+  top: 100px;
+  bottom: 0;
+  height: auto;
+  max-height: none;
+  opacity: 1
+}
+.project-from-api._active .project__image[data-image-position="bottom"],
+.project-from-api._active .project__image[data-image-position="full-width"] {
+  height: auto;
+  max-height: none;
+  opacity: 1
+}
+.project._active:not(.project-from-api) .project__image {
+  height: auto !important;
+  max-height: none !important
+}
+.project .project__image img {
+  -webkit-transform-origin: left bottom;
+  transform-origin: left bottom;
+  -webkit-transition: opacity .5s ease-in-out, -webkit-transform .5s ease-in-out;
+  transition: opacity .5s ease-in-out, transform .5s ease-in-out
+}
+.project-from-api .project__image img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: left bottom;
+  object-position: left bottom
+}
+.project-from-api .project__image[data-image-position="left"] img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: left center;
+  object-position: left center;
+  -webkit-transform-origin: left center;
+  transform-origin: left center
+}
+.project-from-api .project__image[data-image-fit="cover"] img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center bottom;
+  object-position: center bottom
+}
+/* bottom / full-width: full bleed by width, keep aspect ratio */
+.project-from-api .project__image[data-image-position="bottom"] img,
+.project-from-api .project__image[data-image-position="full-width"] img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: none;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: center bottom;
+  object-position: center bottom
+}
+.project-from-api .project__logo {
+  --logo-scale: 1;
+  width: calc(var(--logo-w, 160) * 1px * var(--logo-scale));
+  height: calc(var(--logo-h, 52) * 1px * var(--logo-scale));
+  max-width: min(100%, calc(var(--logo-w, 160) * 1px * var(--logo-scale)));
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start
+}
+.project-from-api .project__logo img,
+.project-from-api .project__logo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: left center;
+  object-position: left center;
+  filter: drop-shadow(0 4px 24px rgba(0,0,0,.35))
+}
+.project._not-active .project__image img {
+  opacity: 0;
+  -webkit-transform: scale(0.94);
+  transform: scale(0.94)
+}
+.project._active .project__image img {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1)
+}
+.project.project-dynamic._active {
+  background: transparent;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.5) rgba(255,255,255,.06)
+}
+.project.project-dynamic::-webkit-scrollbar {
+  width: 3px
+}
+.project.project-dynamic::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.06)
+}
+.project.project-dynamic::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.45);
+  border-radius: 2px
+}
+.project.project-dynamic .project__body {
+  position: relative;
+  z-index: 0;
+  min-height: 100%;
+  isolation: isolate;
+  align-items: stretch
+}
+.project.project-dynamic .project__left {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 58%;
+  min-width: 0;
+  margin-right: 2rem;
+  justify-content: flex-start
+}
+.project.project-dynamic .project__left-head {
+  flex: 0 0 auto
+}
+.project.project-dynamic .project__number {
+  margin-bottom: .5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .04em;
+  opacity: .95;
+  text-shadow: 0 1px 20px rgba(0,0,0,.45)
+}
+.project.project-dynamic .project__title {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  white-space: normal;
+  text-shadow: 0 2px 28px rgba(0,0,0,.55)
+}
+.project.project-dynamic .project__logo {
+  margin-top: auto;
+  padding-top: 2rem
+}
+.project.project-dynamic .project__logo img,
+.project.project-dynamic .project__logo svg {
+  max-width: 52%;
+  max-height: 5.5rem;
+  width: auto;
+  height: auto;
+  -o-object-fit: contain;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 24px rgba(0,0,0,.35))
+}
+.project.project-dynamic .project__right {
+  flex: 0 0 32%;
+  max-width: 22rem;
+  min-width: 12rem;
+  padding-top: .25rem;
+  padding-bottom: .5rem;
+  margin-left: auto;
+  justify-content: space-between;
+  align-self: stretch;
+  text-shadow: 0 1px 18px rgba(0,0,0,.4)
+}
+.project.project-dynamic .project__products {
+  flex: 0 0 auto
+}
+.project.project-dynamic .project__products-title {
+  opacity: 1;
+  color: rgba(255,255,255,.5);
+  font-size: .9375rem;
+  margin-bottom: 1.75rem;
+  letter-spacing: .02em
+}
+.project.project-dynamic .project__products-item {
+  margin-bottom: 1.75rem;
+  color: #fff
+}
+.project.project-dynamic .project__products-item span {
+  color: rgba(255,255,255,.55);
+  font-weight: 300
+}
+.project.project-dynamic .project__descr {
+  margin-top: auto;
+  padding-top: 2rem;
+  flex: 0 1 auto;
+  color: rgba(255,255,255,.92);
+  font-size: 1rem;
+  line-height: 1.55;
+  font-weight: 300
+}
+.project.project-dynamic .project__descr p {
+  margin: 0 0 .75rem
+}
+.project.project-dynamic .project__descr p:last-child {
+  margin-bottom: 0
+}
+.project.project-dynamic .project__arrow-down {
+  bottom: 2.75rem;
+  z-index: 3
+}
 .project__body {
   height: 100%;
   flex: 0 0 100%;
@@ -1091,7 +1421,7 @@ textarea {
 }
 .project__title {
   font-weight: 500;
-  font-size: 3.875rem;
+  font-size: clamp(2.625rem, 3.2vw + .5rem, 3.125rem);
   flex: 1 1 auto;
   margin-bottom: 1rem;
   position: relative;
@@ -1175,6 +1505,10 @@ textarea {
   font-weight: 300;
   font-size: 1rem;
   line-height: 150%
+}
+.project-from-api .project__right .project__descr:only-child,
+.project-from-api .project__right .project__descr:last-child {
+  margin-top: auto
 }
 @-webkit-keyframes scrollArrowMoving {
   0% {
@@ -1513,6 +1847,16 @@ textarea {
   .project {
     padding: 2rem 1.5rem
   }
+  .project-from-api._active {
+    --project-pad-bottom: 1.5rem
+  }
+  .project-from-api._active .project__body {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem
+  }
+  .project-from-api .project__logo {
+    --logo-scale: .85
+  }
   .project._not-active {
     padding: 2rem 1.5rem
   }
@@ -1686,76 +2030,321 @@ textarea {
     overflow-y: auto
   }
   .project {
+    --project-mobile-image-h: 12.5rem;
     padding: 1.5rem 1rem;
     border-bottom: .5px solid var(--black);
     width: 100%;
     height: auto;
-    display: flex;
-    gap: 6.25rem
+    display: block;
+    gap: 0;
+    overflow: hidden;
+    transition: height .5s ease-in-out,min-height .5s ease-in-out,padding .5s ease-in-out,background-color .5s ease-in-out
   }
   .project._not-active {
     width: 100%;
     min-width: 100%;
     padding: 1.5rem 1rem;
-    height: 62px
+    height: 62px;
+    min-height: 62px;
+    overflow: hidden
+  }
+  .project._active {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none
+  }
+  .project._active::-webkit-scrollbar {
+    display: none;
+    height: 0
+  }
+  .project._active .project__body {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    box-sizing: border-box
   }
   .project._not-active .project__left {
-    flex-direction: row-reverse;
-    align-items: center
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    margin-right: 0
   }
   .project._not-active .project__number {
     margin-left: 0;
-    margin-bottom: 0
+    margin-bottom: 0;
+    position: relative;
+    z-index: 2
   }
-  .project-1 {
-    height: 661.2px
+  .project._not-active .project__hidden-title {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    right: auto;
+    bottom: auto;
+    -webkit-writing-mode: horizontal-tb;
+    -ms-writing-mode: lr-tb;
+    writing-mode: horizontal-tb;
+    -webkit-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+    color: var(--black);
+    white-space: nowrap;
+    pointer-events: none
   }
-  .project-2 {
-    height: 773.57px
-  }
-  .project-3 .project__image {
-    margin-left: -17px
-  }
-  .project-3 {
-    height: 652.11px
-  }
-  .project-4 .project__image {
-    margin-left: -17px
-  }
-  .project-4 {
-    height: 667.18px
-  }
-  .project-5 .project__image {
-    margin-left: -17px
-  }
+  .project-1,
+  .project-2,
+  .project-3,
+  .project-4,
   .project-5 {
-    height: 671.77px
+    height: auto
+  }
+  .project-1._not-active,
+  .project-2._not-active,
+  .project-3._not-active,
+  .project-4._not-active,
+  .project-5._not-active {
+    height: 62px
+  }
+  .project-3 .project__image,
+  .project-4 .project__image,
+  .project-5 .project__image {
+    margin-left: 0
   }
   .project__left {
-    margin-right: 1.25rem
+    margin-right: 0
   }
   .project__number {
     font-size: 1rem
   }
-  ._not-active .project__hidden-title {
-    -webkit-transform: translate(0,0);
-    transform: translate(0,0)
-  }
   .project__hidden-title {
-    top: 25px;
-    left: 20px;
-    -webkit-transform: translate(0,-200%);
-    transform: translate(0,-200%)
+    top: 50%;
+    left: 1rem;
+    bottom: auto;
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%);
+    -webkit-writing-mode: horizontal-tb;
+    -ms-writing-mode: lr-tb;
+    writing-mode: horizontal-tb
   }
   .project__arrow-down {
-    bottom: 41px
+    bottom: 1.25rem;
+    left: auto;
+    right: 3.5rem;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg)
+  }
+  .project__products-title {
+    margin-bottom: 1.25rem
   }
   .project__products-item {
     font-size: 1.25rem;
-    margin-bottom: 1.5rem
+    margin-bottom: 1.25rem
   }
   .project__descr {
     display: none
+  }
+  .project.project-dynamic .project__descr {
+    display: none
+  }
+  .project.project-dynamic .project__right {
+    max-width: none;
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+    margin-left: 0;
+    padding-top: 0
+  }
+  .project.project-dynamic .project__left {
+    margin-right: 0;
+    flex: 1 1 auto
+  }
+  /* Mobile Figma layout for API projects — ignore desktop position params */
+  .project-from-api._active {
+    padding: 1.5rem 0 1.25rem !important
+  }
+  .project-from-api._active .project__body {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto var(--project-mobile-image-h) auto;
+    grid-template-areas: "number" "title" "image" "products";
+    row-gap: 0;
+    padding: 0 1rem 3.75rem !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    box-sizing: border-box;
+    position: relative;
+    margin: 0 !important
+  }
+  .project-from-api._active .project__left,
+  .project-from-api._active .project__right {
+    display: contents;
+    padding-bottom: 0;
+    margin: 0
+  }
+  .project-from-api._active .project__number {
+    grid-area: number;
+    margin: 0 0 .35rem
+  }
+  .project-from-api._active .project__title {
+    grid-area: title;
+    flex: 0 0 auto;
+    margin: 0 0 1.25rem;
+    font-size: 2.125rem;
+    white-space: normal;
+    line-height: 1.15
+  }
+  .project-from-api._active .project__image,
+  .project-from-api._active .project__image[data-image-position],
+  .project-from-api._active .project__image[data-image-position="left"],
+  .project-from-api._active .project__image[data-image-position="left-offset"],
+  .project-from-api._active .project__image[data-image-position="bottom-left"],
+  .project-from-api._active .project__image[data-image-position="bottom"],
+  .project-from-api._active .project__image[data-image-position="full-width"] {
+    grid-area: image;
+    position: relative !important;
+    left: 0 !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: var(--project-mobile-image-h) !important;
+    max-height: var(--project-mobile-image-h) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    -webkit-transform: none !important;
+    transform: none !important
+  }
+  .project-from-api._active .project__image img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+    -o-object-position: left center;
+    object-position: left center
+  }
+  .project-from-api._active .project__products {
+    grid-area: products;
+    flex: 0 0 auto;
+    padding: 1rem 0 0;
+    margin: 0;
+    min-height: 0;
+    overflow: visible
+  }
+  .project-from-api._active .project__products-title {
+    margin-bottom: 1.25rem
+  }
+  .project-from-api._active .project__products-item {
+    margin-bottom: 1.25rem
+  }
+  .project-from-api._active .project__products-item:last-child {
+    margin-bottom: 0
+  }
+  .project-from-api._active .project__descr {
+    display: none
+  }
+  .project-from-api._active .project__body:not(:first-child) {
+    grid-template-areas: "title" "image" "products";
+    grid-template-rows: auto var(--project-mobile-image-h) auto;
+    margin-top: 0 !important
+  }
+  .project-from-api._active .project__body:not(:first-child) .project__descr {
+    display: block;
+    grid-area: products;
+    padding-top: 1rem;
+    margin: 0;
+    overflow: visible
+  }
+  .project-from-api._active .project__logo {
+    grid-area: unset;
+    position: absolute !important;
+    left: 1rem;
+    right: auto;
+    top: auto;
+    bottom: 0;
+    margin: 0;
+    z-index: 3
+  }
+  .project-from-api._active .project__body--text-left {
+    flex-direction: unset
+  }
+  .project-from-api._active .project__body--text-left .project__left {
+    margin-left: 0 !important;
+    margin-right: 0 !important
+  }
+  .project-from-api._not-active .project__left {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    position: relative
+  }
+  .project-from-api._not-active .project__right {
+    display: none !important
+  }
+  .project-from-api._not-active .project__title,
+  .project-from-api._not-active .project__image,
+  .project-from-api._not-active .project__logo {
+    display: none !important
+  }
+  .project-from-api._not-active .project__number {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    margin: 0 0 0 auto !important;
+    -webkit-transform: none !important;
+    transform: none !important;
+    order: 2
+  }
+  .project-from-api._not-active .project__hidden-title {
+    display: block !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 1rem !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    -webkit-writing-mode: horizontal-tb !important;
+    -ms-writing-mode: lr-tb !important;
+    writing-mode: horizontal-tb !important;
+    -webkit-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 2;
+    color: var(--black) !important;
+    white-space: nowrap;
+    pointer-events: none;
+    order: 0
   }
   @-webkit-keyframes scrollArrowMoving {
     0% {
@@ -1763,8 +2352,8 @@ textarea {
       transform: translate(0,0) rotate(-90deg)
     }
     100% {
-      -webkit-transform: translate(100%,0) rotate(-90deg);
-      transform: translate(100%,0) rotate(-90deg)
+      -webkit-transform: translate(8px,0) rotate(-90deg);
+      transform: translate(8px,0) rotate(-90deg)
     }
   }
   @keyframes scrollArrowMoving {
@@ -1773,8 +2362,8 @@ textarea {
       transform: translate(0,0) rotate(-90deg)
     }
     100% {
-      -webkit-transform: translate(100%,0) rotate(-90deg);
-      transform: translate(100%,0) rotate(-90deg)
+      -webkit-transform: translate(8px,0) rotate(-90deg);
+      transform: translate(8px,0) rotate(-90deg)
     }
   }
 }
@@ -1963,19 +2552,46 @@ textarea {
   .spollers-menu {
     height: calc(100dvh - 52px)
   }
+  .project {
+    --project-mobile-image-h: 11.25rem
+  }
   .project__body {
     display: flex;
     flex-direction: column;
-    height: auto
+    height: auto;
+    width: 100%;
+    min-width: 100%;
+    flex: none
   }
   .project__body:first-child .project__logo {
     position: absolute;
     bottom: 21px;
     left: 21px
   }
+  .project-from-api._active .project__body:first-child .project__logo,
+  .project-from-api._active .project__logo {
+    left: 1rem !important;
+    bottom: 0 !important
+  }
+  .project.project-dynamic .project__body:first-child .project__logo {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin-top: auto
+  }
+  .project-from-api .project__logo {
+    --logo-scale: .7
+  }
   .project__body:first-child .project__right {
     padding-top: 1.8125rem;
     padding-bottom: 7.9375rem
+  }
+  .project-from-api._active .project__body:first-child .project__right {
+    padding-top: 0;
+    padding-bottom: 0
+  }
+  .project-from-api._active .project__products {
+    padding: 1rem 0 0 !important
   }
   .project__right {
     padding-top: 1.8125rem
@@ -1991,9 +2607,12 @@ textarea {
     position: static;
     margin-bottom: 1rem
   }
+  .project-from-api._active {
+    --project-pad-bottom: 1rem
+  }
   .project__arrow-down {
     left: auto;
-    right: 85px
+    right: 3.5rem
   }
   .project__products-title {
     font-size: .9375rem;

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-api-base="https://back.genisoft.ru">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="css/style.min.css?_v=20251227230107">
+	<link rel="stylesheet" href="css/style.css?_v=20251227230107">
 	<title>Главная</title>
 	<!-- <script src="https://www.google.com/recaptcha/api.js?_v=20251227230107"></script> -->
 	<script src="https://unpkg.com/simple-phone-mask@1.0.4/dist/simple-phone-mask.min.js?_v=20251227230107" defer></script>
@@ -48,7 +48,7 @@
 										</defs>
 									</svg>
 								</div>
-								Связаться с нами
+								<span class="header__button-label">Связаться с нами</span>
 							</button>
 						</div>
 						<div class="header__background">
@@ -66,7 +66,7 @@
 						<div class="header__bottom">
 							<h1 class="header__title">Мы Genisoft. <br>
 								Создание сайтов, мобильных и WEB-приложений.</h1>
-							<button type="button" class="header__main-button icon-contacts-menu">Заказать проект</button>
+							<button type="button" class="header__main-button icon-contacts-menu"><span class="header__button-label">Заказать проект</span></button>
 						</div>
 					</section>
 				</div>
@@ -78,11 +78,11 @@
 				<form action="#" class="contacts__form form-contacts">
 					<div class="form-contacts__input">
 						<label class="form-contacts__label" for="phone">Ваш номер</label>
-						<input type="tel" id="phone" name="form[phone]" placeholder="8 (912) 345-67-89" class="form-contacts__input-input input">
+						<input type="tel" id="phone" name="form[phone]" placeholder="+7 (912) 345-67-89" class="form-contacts__input-input input">
 					</div>
 					<div class="form-contacts__agree-text">Нажимая кнопку “Отправить заявку”, вы соглашаетесь <br>
 						с <a target="_blank" href="./agreement.html">Политикой конфиденциальности</a>.</div>
-					<button type="submit" class="g-recaptcha form-contacts__button button" data-sitekey="EXAMPLE-KEY" data-callback='onSubmit' data-action='submit'>Отправить
+					<button type="submit" class="form-contacts__button button">Отправить
 						заявку</button>
 				</form>
 				<div class="contacts__info">
@@ -94,7 +94,8 @@
 							</div>
 							<span>office@genisoft.ru</span>
 						</a>
-						<a href="https://t.me/genisoft" class="contacts__info-item">
+<!--						<a href="https://t.me/genisoft" class="contacts__info-item">-->
+						<a href="#" class="contacts__info-item">
 							<div class="contacts__info-image">
 								<img src="img/telegram.svg" alt="Icon">
 							</div>
@@ -131,6 +132,7 @@
 							</div>
 						</button>
 						<div class="menu__spollers spollers-menu">
+<!-- mock projects
 							<div class="spollers-menu__item _active">
 								<div class="spollers-menu__project project project-1 _active">
 									<div class="project__body">
@@ -406,6 +408,7 @@
 									</button>
 								</div>
 							</div>
+-->
 						</div>
 					</nav>
 				</div>
@@ -437,7 +440,8 @@
 			</svg>
 		</button>
 	</div>
-	<script src="js/app.min.js?_v=20251227230107"></script>
+	<script src="js/site-api.js?_v=20251227230107" defer></script>
+	<script src="js/app.js?_v=20251227230107" defer></script>
 </body>
 
 </html>
