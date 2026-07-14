@@ -21068,6 +21068,65 @@
         initSpollers();
         initScrollLogic();
     };
+    /**
+     * Open projects menu reliably (for deep-link after slow API).
+     * Does not use icon.click() — that fails while bodyLockStatus is false.
+     */
+    window.openGenisoftProjectsMenu = function(options) {
+        options = options || {};
+        const root = document.documentElement;
+        const forceShowActive = options.forceShowActive !== false;
+        const revealActiveItems = () => {
+            if (!forceShowActive) return;
+            document.querySelectorAll(".spollers-menu__item._active").forEach((item => {
+                item.style.transition = "none";
+                item.style.opacity = "1";
+                item.style.visibility = "visible";
+                item.style.webkitTransform = "translate(0,0)";
+                item.style.transform = "translate(0,0)";
+                void item.offsetWidth;
+                item.style.transition = "";
+                item.style.opacity = "";
+                item.style.visibility = "";
+                item.style.webkitTransform = "";
+                item.style.transform = "";
+            }));
+            const activeProject = document.querySelector(".spollers-menu__project._active");
+            if (activeProject) {
+                if (isMobileProjectsView()) {
+                    clearProjectInlineHeight(activeProject);
+                    activeProject.style.height = "auto";
+                }
+                checkScroll(activeProject);
+            }
+        };
+        const finishOpen = () => {
+            if (!root.classList.contains("menu-open")) root.classList.add("menu-open");
+            requestAnimationFrame(revealActiveItems);
+        };
+        if (root.classList.contains("menu-open")) {
+            revealActiveItems();
+            return;
+        }
+        const tryOpen = attemptsLeft => {
+            if (root.classList.contains("menu-open")) {
+                revealActiveItems();
+                return;
+            }
+            if (!bodyLockStatus) {
+                if (attemptsLeft > 0) {
+                    setTimeout((() => tryOpen(attemptsLeft - 1)), 50);
+                    return;
+                }
+                root.classList.add("lock");
+                finishOpen();
+                return;
+            }
+            if (!root.classList.contains("lock")) bodyLock();
+            finishOpen();
+        };
+        tryOpen(40);
+    };
     function showFormNotification(notification, title, text, delay = 5000) {
         if (!notification) return;
         const titleEl = notification.querySelector(".notification__title");

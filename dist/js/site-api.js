@@ -250,14 +250,33 @@
         return String(a || "").trim().toLowerCase() === String(b || "").trim().toLowerCase();
     }
 
+    function revealDeepLinkedProject() {
+        document.querySelectorAll(".spollers-menu__item._active").forEach(function (item) {
+            item.style.transition = "none";
+            item.style.opacity = "1";
+            item.style.visibility = "visible";
+            item.style.webkitTransform = "translate(0,0)";
+            item.style.transform = "translate(0,0)";
+            void item.offsetWidth;
+            item.style.transition = "";
+            item.style.opacity = "";
+            item.style.visibility = "";
+            item.style.webkitTransform = "";
+            item.style.transform = "";
+        });
+    }
+
     function openProjectsSection() {
-        if (document.documentElement.classList.contains("menu-open")) return;
-        var icon = document.querySelector(".icon-menu");
-        if (icon) {
-            icon.click();
+        if (typeof window.openGenisoftProjectsMenu === "function") {
+            window.openGenisoftProjectsMenu({ forceShowActive: true });
             return;
         }
-        document.documentElement.classList.add("menu-open");
+        var root = document.documentElement;
+        if (!root.classList.contains("menu-open")) {
+            root.classList.add("menu-open");
+            root.classList.add("lock");
+        }
+        revealDeepLinkedProject();
     }
 
     function appendApiProjects(data) {
@@ -328,9 +347,12 @@
         }
 
         if (matchedIdx >= 0) {
-            // Open after UI is ready so menuInit listeners / scroll checks apply
+            // Double rAF: let the browser paint collapsed cards, then open.
+            // After a slow init, icon.click() + CSS 2.2s intro often never show the project.
             requestAnimationFrame(function () {
-                openProjectsSection();
+                requestAnimationFrame(function () {
+                    openProjectsSection();
+                });
             });
         }
     }
